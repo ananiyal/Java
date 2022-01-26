@@ -1,13 +1,17 @@
 package Ananiyal;
 
-public class Employee{
-float salary=40000;
+public class Animals {
+	void eat(){System.out.println("eating...");}
+
 }
-class Programmer extends Employee{
-int bonus=10000;
- public static void main(String args[]){
-Programmer p=new Programmer();
-System.out.println("Programmer salary is:"+p.salary);
-System.out.println("Bonus of Programmer is:"+p.bonus);
+class Dog extends Animals{
+	void bark(){System.out.println("barking...");}
 }
+class TestInheritance{
+	public static void main(String args[])
+	{
+		Dog d=new Dog();
+		d.bark();
+		d.bark();
+	}
 }
