@@ -1,0 +1,11 @@
+package Ananiyal;
+
+public class immutabledemo {
+	public static void main(String arg[]){
+	String a = "Ananiyal"; 
+	a.concat("Tudu");
+	System.out.println(a);
+	
+	}
+
+}
