@@ -215,4 +215,88 @@ mysql> select * from officers;
 +----+----------+----------+--------------+
 5 rows in set (0.00 sec)
 
+mysql> select NAME, sum(WorkingHours) as "TotalWorkingHours" from officers group by NAME;
++----------+-------------------+
+| NAME     | TotalWorkingHours |
++----------+-------------------+
+| ANANIYAL |                 8 |
+| PETER    |                 8 |
+| JOHN     |                 8 |
+| JAMES    |                10 |
+| MARK     |                 9 |
++----------+-------------------+
+5 rows in set (0.07 sec)
+
+mysql> select NAME, min(WorkingHours) as "TotalWorkingHours" from officers group by NAME;
++----------+-------------------+
+| NAME     | TotalWorkingHours |
++----------+-------------------+
+| ANANIYAL |                 8 |
+| PETER    |                 8 |
+| JOHN     |                 8 |
+| JAMES    |                10 |
+| MARK     |                 9 |
++----------+-------------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from officers;
++----+----------+----------+--------------+
+| ID | NAME     | ADDRESS  | workingHours |
++----+----------+----------+--------------+
+|  1 | ANANIYAL | SILIGURI |            8 |
+|  2 | PETER    | MUMBAI   |            8 |
+|  3 | JOHN     | KOLKATA  |            8 |
+|  4 | JAMES    | DELHI    |           10 |
+|  5 | MARK     | PATNA    |            9 |
++----+----------+----------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> select NAME, max(WorkingHours) as "TotalWorkingHours" from officers group by NAME;
++----------+-------------------+
+| NAME     | TotalWorkingHours |
++----------+-------------------+
+| ANANIYAL |                 8 |
+| PETER    |                 8 |
+| JOHN     |                 8 |
+| JAMES    |                10 |
+| MARK     |                 9 |
++----------+-------------------+
+5 rows in set (0.00 sec)
+
+mysql> select NAME, avg(WorkingHours) as "TotalWorkingHours" from officers group by NAME;
++----------+-------------------+
+| NAME     | TotalWorkingHours |
++----------+-------------------+
+| ANANIYAL |            8.0000 |
+| PETER    |            8.0000 |
+| JOHN     |            8.0000 |
+| JAMES    |           10.0000 |
+| MARK     |            9.0000 |
++----------+-------------------+
+5 rows in set (0.00 sec)
+
+mysql> select NAME, sum(WorkingHours) as "TotalWorkingHours" from officers group by NAME having sum(TotalWorkingHours)>a;
+ERROR 1111 (HY000): Invalid use of group function
+mysql> select NAME, sum(WorkingHours) as "TotalWorkingHours" from officers group by NAME having sum(WorkingHours)>a;
+ERROR 1054 (42S22): Unknown column 'a' in 'having clause'
+mysql> select NAME, sum(WorkingHours) as "TotalWorkingHours" from officers group by NAME having sum(WorkingHours)>8;
++-------+-------------------+
+| NAME  | TotalWorkingHours |
++-------+-------------------+
+| JAMES |                10 |
+| MARK  |                 9 |
++-------+-------------------+
+2 rows in set (0.00 sec)
+
+mysql> select NAME, sum(WorkingHours) as "TotalWorkingHours" from officers group by NAME having sum(TotalWorkingHours)>8;
+ERROR 1111 (HY000): Invalid use of group function
+mysql> select NAME, sum(WorkingHours) as "TotalWorkingHours" from officers group by NAME having sum(WorkingHours)>8;
++-------+-------------------+
+| NAME  | TotalWorkingHours |
++-------+-------------------+
+| JAMES |                10 |
+| MARK  |                 9 |
++-------+-------------------+
+2 rows in set (0.00 sec)
+
 mysql>
