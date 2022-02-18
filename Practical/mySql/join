@@ -1,0 +1,218 @@
+Enter password: ********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 40
+Server version: 8.0.27 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use Ananiyal;
+Database changed
+mysql> select * from officers;
++----+----------+----------+
+| ID | NAME     | ADDRESS  |
++----+----------+----------+
+|  1 | ANANIYAL | SILIGURI |
+|  2 | PETER    | MUMBAI   |
+|  3 | JOHN     | KOLKATA  |
+|  4 | JAMES    | DELHI    |
+|  5 | MARK     | PATNA    |
++----+----------+----------+
+5 rows in set (0.01 sec)
+
+mysql> select * from students;
++----+--------+------------+
+| ID | NAME   | COURSE     |
++----+--------+------------+
+|  1 | ANA    | JAVA       |
+|  2 | ASHOK  | C++        |
+|  6 | KAUSIK | JAVA       |
+|  7 | THOMAS | WEB DESIGN |
+|  8 | ANDREW | DOTNET     |
++----+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select officers.NAME, officers.ADDRESS, students.NAME from officers INNER JOIN students ON officers.ID=students.ID;
++----------+----------+-------+
+| NAME     | ADDRESS  | NAME  |
++----------+----------+-------+
+| ANANIYAL | SILIGURI | ANA   |
+| PETER    | MUMBAI   | ASHOK |
++----------+----------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select officers.NAME, officers.ADDRESS, students.COURSE from officers LEFT JOIN students ON officers.ID=students.ID;
++----------+----------+--------+
+| NAME     | ADDRESS  | COURSE |
++----------+----------+--------+
+| ANANIYAL | SILIGURI | JAVA   |
+| PETER    | MUMBAI   | C++    |
+| JOHN     | KOLKATA  | NULL   |
+| JAMES    | DELHI    | NULL   |
+| MARK     | PATNA    | NULL   |
++----------+----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select officers.NAME, officers.ADDRESS, students.COURSE, students.NAME from officers RIGHT JOIN students ON officers.ID=students.ID;
++----------+----------+------------+--------+
+| NAME     | ADDRESS  | COURSE     | NAME   |
++----------+----------+------------+--------+
+| ANANIYAL | SILIGURI | JAVA       | ANA    |
+| PETER    | MUMBAI   | C++        | ASHOK  |
+| NULL     | NULL     | JAVA       | KAUSIK |
+| NULL     | NULL     | WEB DESIGN | THOMAS |
+| NULL     | NULL     | DOTNET     | ANDREW |
++----------+----------+------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select officers.ID, officers.NAME, officers.ADDRESS, students.ID, students.NAME, students.COURSE from officers CROSS JOIN students;;
++----+----------+----------+----+--------+------------+
+| ID | NAME     | ADDRESS  | ID | NAME   | COURSE     |
++----+----------+----------+----+--------+------------+
+|  5 | MARK     | PATNA    |  1 | ANA    | JAVA       |
+|  4 | JAMES    | DELHI    |  1 | ANA    | JAVA       |
+|  3 | JOHN     | KOLKATA  |  1 | ANA    | JAVA       |
+|  2 | PETER    | MUMBAI   |  1 | ANA    | JAVA       |
+|  1 | ANANIYAL | SILIGURI |  1 | ANA    | JAVA       |
+|  5 | MARK     | PATNA    |  2 | ASHOK  | C++        |
+|  4 | JAMES    | DELHI    |  2 | ASHOK  | C++        |
+|  3 | JOHN     | KOLKATA  |  2 | ASHOK  | C++        |
+|  2 | PETER    | MUMBAI   |  2 | ASHOK  | C++        |
+|  1 | ANANIYAL | SILIGURI |  2 | ASHOK  | C++        |
+|  5 | MARK     | PATNA    |  6 | KAUSIK | JAVA       |
+|  4 | JAMES    | DELHI    |  6 | KAUSIK | JAVA       |
+|  3 | JOHN     | KOLKATA  |  6 | KAUSIK | JAVA       |
+|  2 | PETER    | MUMBAI   |  6 | KAUSIK | JAVA       |
+|  1 | ANANIYAL | SILIGURI |  6 | KAUSIK | JAVA       |
+|  5 | MARK     | PATNA    |  7 | THOMAS | WEB DESIGN |
+|  4 | JAMES    | DELHI    |  7 | THOMAS | WEB DESIGN |
+|  3 | JOHN     | KOLKATA  |  7 | THOMAS | WEB DESIGN |
+|  2 | PETER    | MUMBAI   |  7 | THOMAS | WEB DESIGN |
+|  1 | ANANIYAL | SILIGURI |  7 | THOMAS | WEB DESIGN |
+|  5 | MARK     | PATNA    |  8 | ANDREW | DOTNET     |
+|  4 | JAMES    | DELHI    |  8 | ANDREW | DOTNET     |
+|  3 | JOHN     | KOLKATA  |  8 | ANDREW | DOTNET     |
+|  2 | PETER    | MUMBAI   |  8 | ANDREW | DOTNET     |
+|  1 | ANANIYAL | SILIGURI |  8 | ANDREW | DOTNET     |
++----+----------+----------+----+--------+------------+
+25 rows in set (0.01 sec)
+
+ERROR:
+No query specified
+
+mysql> select ADDRESS, count (*) from officers group by ADDRESS;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*) from officers group by ADDRESS' at line 1
+mysql> select ADDRESS, count (*) from officers GROUP BY ADDRESS;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*) from officers GROUP BY ADDRESS' at line 1
+mysql> select ADDRESS, count (*) from officers group by ADDRESS;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*) from officers group by ADDRESS' at line 1
+mysql> select ADDRESS, count(*) from officers group by ADDRESS;
++----------+----------+
+| ADDRESS  | count(*) |
++----------+----------+
+| SILIGURI |        1 |
+| MUMBAI   |        1 |
+| KOLKATA  |        1 |
+| DELHI    |        1 |
+| PATNA    |        1 |
++----------+----------+
+5 rows in set (0.01 sec)
+
+mysql> alter table officers add column workingHours int(20);
+Query OK, 0 rows affected, 1 warning (0.17 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> select * from officers;
++----+----------+----------+--------------+
+| ID | NAME     | ADDRESS  | workingHours |
++----+----------+----------+--------------+
+|  1 | ANANIYAL | SILIGURI |         NULL |
+|  2 | PETER    | MUMBAI   |         NULL |
+|  3 | JOHN     | KOLKATA  |         NULL |
+|  4 | JAMES    | DELHI    |         NULL |
+|  5 | MARK     | PATNA    |         NULL |
++----+----------+----------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> update officers set WorkingHours='8' where ID=1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from officers;
++----+----------+----------+--------------+
+| ID | NAME     | ADDRESS  | workingHours |
++----+----------+----------+--------------+
+|  1 | ANANIYAL | SILIGURI |            8 |
+|  2 | PETER    | MUMBAI   |         NULL |
+|  3 | JOHN     | KOLKATA  |         NULL |
+|  4 | JAMES    | DELHI    |         NULL |
+|  5 | MARK     | PATNA    |         NULL |
++----+----------+----------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> update officers set WorkingHours='8' where ID=2;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update officers set WorkingHours='8' where ID=3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update officers set WorkingHours='8' where ID=4;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update officers set WorkingHours='8' where ID=5;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from officers;
++----+----------+----------+--------------+
+| ID | NAME     | ADDRESS  | workingHours |
++----+----------+----------+--------------+
+|  1 | ANANIYAL | SILIGURI |            8 |
+|  2 | PETER    | MUMBAI   |            8 |
+|  3 | JOHN     | KOLKATA  |            8 |
+|  4 | JAMES    | DELHI    |            8 |
+|  5 | MARK     | PATNA    |            8 |
++----+----------+----------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> update officers set WorkingHours='10' where ID=4;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from officers;
++----+----------+----------+--------------+
+| ID | NAME     | ADDRESS  | workingHours |
++----+----------+----------+--------------+
+|  1 | ANANIYAL | SILIGURI |            8 |
+|  2 | PETER    | MUMBAI   |            8 |
+|  3 | JOHN     | KOLKATA  |            8 |
+|  4 | JAMES    | DELHI    |           10 |
+|  5 | MARK     | PATNA    |            8 |
++----+----------+----------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> update officers set WorkingHours=9 where ID=5;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from officers;
++----+----------+----------+--------------+
+| ID | NAME     | ADDRESS  | workingHours |
++----+----------+----------+--------------+
+|  1 | ANANIYAL | SILIGURI |            8 |
+|  2 | PETER    | MUMBAI   |            8 |
+|  3 | JOHN     | KOLKATA  |            8 |
+|  4 | JAMES    | DELHI    |           10 |
+|  5 | MARK     | PATNA    |            9 |
++----+----------+----------+--------------+
+5 rows in set (0.00 sec)
+
+mysql>
