@@ -1,6 +1,7 @@
 
 mysql> use org;
 Database changed
+
 mysql> show tables;
 +---------------+
 | Tables_in_org |
@@ -86,6 +87,10 @@ mysql> select * from title;
 +-----------------+----------------+---------------------+
 8 rows in set (0.00 sec)
 
+
+
+Q-1. Write an SQL query to fetch “FIRST_NAME” from Employee table using the alias name as <EMPLOYEE_NAME>.
+
 mysql> select First_Name as "EMPLOYEE_NAME" from employee;
 +---------------+
 | EMPLOYEE_NAME |
@@ -100,6 +105,10 @@ mysql> select First_Name as "EMPLOYEE_NAME" from employee;
 | Geetika       |
 +---------------+
 8 rows in set (0.05 sec)
+
+
+
+Q-2. Write an SQL query to fetch “FIRST_NAME” from EMPLOYEE table in upper case.
 
 mysql> select UPPER(First_Name) from employee;
 +-------------------+
@@ -116,6 +125,10 @@ mysql> select UPPER(First_Name) from employee;
 +-------------------+
 8 rows in set (0.02 sec)
 
+
+
+Q-3. Write an SQL query to fetch unique values of DEPARTMENT from EMPLOYEE table.
+
 mysql> select DISTINCT Department from employee;
 +------------+
 | Department |
@@ -125,6 +138,10 @@ mysql> select DISTINCT Department from employee;
 | Account    |
 +------------+
 3 rows in set (0.01 sec)
+
+
+
+Q-4. Write an SQL query to print the first three characters of FIRST_NAME from EMPLOYEE table.
 
 mysql> select SUBSTRING(First_Name,1,3) from employee;
 +---------------------------+
@@ -141,4 +158,442 @@ mysql> select SUBSTRING(First_Name,1,3) from employee;
 +---------------------------+
 8 rows in set (0.01 sec)
 
-mysql> Select INSTR(FIRST_NAME, BINARY'a') from employee where FIRST_NAME =
+
+
+Q-5. Write an SQL query to find the position of the alphabet (‘a’) in the first name column ‘Niharika’ from EMPLOYEE table. 
+
+mysql> select INSTR(First_Name, BINARY'a') from employee where First_Name='Niharika';
++------------------------------+
+| INSTR(First_Name, BINARY'a') |
++------------------------------+
+|                            4 |
++------------------------------+
+1 row in set, 1 warning (0.01 sec)
+
+mysql> select INSTR(First_Name, BINARY'm') from employee where First_Name='Niharika';
++------------------------------+
+| INSTR(First_Name, BINARY'm') |
++------------------------------+
+|                            0 |
++------------------------------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql> select INSTR(First_Name, BINARY'h') from employee where First_Name='Niharika';
++------------------------------+
+| INSTR(First_Name, BINARY'h') |
++------------------------------+
+|                            3 |
++------------------------------+
+1 row in set, 1 warning (0.00 sec)
+
+
+
+Q-6. Write an SQL query to print the FIRST_NAME from EMPLOYEE table after removing white spaces from the right side.
+
+mysql> select RTRIM(First_Name) from employee;
++-------------------+
+| RTRIM(First_Name) |
++-------------------+
+| Monika            |
+| Niharika          |
+| Vishal            |
+| Amitabh           |
+| Vivek             |
+| Vipul             |
+| Satish            |
+| Geetika           |
++-------------------+
+8 rows in set (0.00 sec)
+
+
+
+Q-7. Write an SQL query to print the DEPARTMENT from EMPLOYEE table after removing white spaces from the left side.
+
+mysql> select LTRIM(Department) from employee;
++-------------------+
+| LTRIM(Department) |
++-------------------+
+| HR                |
+| Admin             |
+| HR                |
+| Admin             |
+| Admin             |
+| Account           |
+| Account           |
+| Admin             |
++-------------------+
+8 rows in set (0.00 sec)
+
+
+
+Q-8. Write an SQL query that fetches the unique values of DEPARTMENT from EMPLOYEE table and prints its length.
+
+mysql> select DISTINCT( length(department)) from employee;
++-----------------------+
+| ( length(department)) |
++-----------------------+
+|                     2 |
+|                     5 |
+|                     7 |
++-----------------------+
+3 rows in set (0.00 sec)
+
+
+
+Q-9. Write an SQL query to print the FIRST_NAME from EMPLOYEE table after replacing ‘a’ with ‘A’.
+
+mysql> select REPLACE(First_Name,'a','A') from employee;
++-----------------------------+
+| REPLACE(First_Name,'a','A') |
++-----------------------------+
+| MonikA                      |
+| NihArikA                    |
+| VishAl                      |
+| AmitAbh                     |
+| Vivek                       |
+| Vipul                       |
+| SAtish                      |
+| GeetikA                     |
++-----------------------------+
+8 rows in set (0.00 sec)
+
+
+
+Q-10. Write an SQL query to print the FIRST_NAME and LAST_NAME from EMPLOYEE table into a single column COMPLETE_NAME. A space char should separate them.
+
+mysql> select CONCAT(First_Name,' ', Last_Name) as "COMPLETE_NAME" from employee;
++-----------------+
+| COMPLETE_NAME   |
++-----------------+
+| Monika Arora    |
+| Niharika Verma  |
+| Vishal Singhal  |
+| Amitabh singh   |
+| Vivek Bhati     |
+| Vipul Diwan     |
+| Satish Kumar    |
+| Geetika Chauhan |
++-----------------+
+8 rows in set (0.00 sec)
+
+mysql> select CONCAT(First_Name,'       ', Last_Name) as "COMPLETE_NAME" from employee;
++-----------------------+
+| COMPLETE_NAME         |
++-----------------------+
+| Monika       Arora    |
+| Niharika       Verma  |
+| Vishal       Singhal  |
+| Amitabh       singh   |
+| Vivek       Bhati     |
+| Vipul       Diwan     |
+| Satish       Kumar    |
+| Geetika       Chauhan |
++-----------------------+
+8 rows in set (0.00 sec)
+
+
+
+Q-11. Write an SQL query to print all EMPLOYEE details from the EMPLOYEE table order by FIRST_NAME Ascending.
+
+mysql> select * from employee order by First_Name;
++-------------+------------+-----------+--------+---------------------+------------+
+| Employee_id | First_Name | Last_Name | Salary | Joining_Date        | Department |
++-------------+------------+-----------+--------+---------------------+------------+
+|           4 | Amitabh    | singh     | 500000 | 2014-02-20 09:00:00 | Admin      |
+|           8 | Geetika    | Chauhan   | 90000  | 2014-04-11 09:00:00 | Admin      |
+|           1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |
+|           2 | Niharika   | Verma     | 80000  | 2014-06-11 09:00:00 | Admin      |
+|           7 | Satish     | Kumar     | 75000  | 2014-01-20 09:00:00 | Account    |
+|           6 | Vipul      | Diwan     | 200000 | 2014-06-11 09:00:00 | Account    |
+|           3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR         |
+|           5 | Vivek      | Bhati     | 500000 | 2014-06-11 09:00:00 | Admin      |
++-------------+------------+-----------+--------+---------------------+------------+
+8 rows in set (0.01 sec)
+
+mysql> select * from employee order by First_Name asc, Department desc;
++-------------+------------+-----------+--------+---------------------+------------+
+| Employee_id | First_Name | Last_Name | Salary | Joining_Date        | Department |
++-------------+------------+-----------+--------+---------------------+------------+
+|           4 | Amitabh    | singh     | 500000 | 2014-02-20 09:00:00 | Admin      |
+|           8 | Geetika    | Chauhan   | 90000  | 2014-04-11 09:00:00 | Admin      |
+|           1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |
+|           2 | Niharika   | Verma     | 80000  | 2014-06-11 09:00:00 | Admin      |
+|           7 | Satish     | Kumar     | 75000  | 2014-01-20 09:00:00 | Account    |
+|           6 | Vipul      | Diwan     | 200000 | 2014-06-11 09:00:00 | Account    |
+|           3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR         |
+|           5 | Vivek      | Bhati     | 500000 | 2014-06-11 09:00:00 | Admin      |
++-------------+------------+-----------+--------+---------------------+------------+
+8 rows in set (0.00 sec)
+
+
+
+Q-12. Write an SQL query to print all EMPLOYEE details from the EMPLOYEE table order by FIRST_NAME Ascending and DEPARTMENT Descending.
+
+mysql> select * from employee order by  Department desc;
++-------------+------------+-----------+--------+---------------------+------------+
+| Employee_id | First_Name | Last_Name | Salary | Joining_Date        | Department |
++-------------+------------+-----------+--------+---------------------+------------+
+|           1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |
+|           3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR         |
+|           2 | Niharika   | Verma     | 80000  | 2014-06-11 09:00:00 | Admin      |
+|           4 | Amitabh    | singh     | 500000 | 2014-02-20 09:00:00 | Admin      |
+|           5 | Vivek      | Bhati     | 500000 | 2014-06-11 09:00:00 | Admin      |
+|           8 | Geetika    | Chauhan   | 90000  | 2014-04-11 09:00:00 | Admin      |
+|           6 | Vipul      | Diwan     | 200000 | 2014-06-11 09:00:00 | Account    |
+|           7 | Satish     | Kumar     | 75000  | 2014-01-20 09:00:00 | Account    |
++-------------+------------+-----------+--------+---------------------+------------+
+8 rows in set (0.00 sec)
+
+
+
+Q-13. Write an SQL query to print details for EMPLOYEEs with the first name as “Vipul” and “Satish” from EMPLOYEE table.
+
+mysql> select * from employee where First_Name in ('Vipul' , 'Satish');
++-------------+------------+-----------+--------+---------------------+------------+
+| Employee_id | First_Name | Last_Name | Salary | Joining_Date        | Department |
++-------------+------------+-----------+--------+---------------------+------------+
+|           6 | Vipul      | Diwan     | 200000 | 2014-06-11 09:00:00 | Account    |
+|           7 | Satish     | Kumar     | 75000  | 2014-01-20 09:00:00 | Account    |
++-------------+------------+-----------+--------+---------------------+------------+
+2 rows in set (0.00 sec)
+
+
+
+Q-14. Write an SQL query to print details of EMPLOYEEs excluding first names, “Vipul” and “Satish” from EMPLOYEE table.
+
+mysql> select * from employee where First_Name not in ('Vipul' , 'Satish');
++-------------+------------+-----------+--------+---------------------+------------+
+| Employee_id | First_Name | Last_Name | Salary | Joining_Date        | Department |
++-------------+------------+-----------+--------+---------------------+------------+
+|           1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |
+|           2 | Niharika   | Verma     | 80000  | 2014-06-11 09:00:00 | Admin      |
+|           3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR         |
+|           4 | Amitabh    | singh     | 500000 | 2014-02-20 09:00:00 | Admin      |
+|           5 | Vivek      | Bhati     | 500000 | 2014-06-11 09:00:00 | Admin      |
+|           8 | Geetika    | Chauhan   | 90000  | 2014-04-11 09:00:00 | Admin      |
++-------------+------------+-----------+--------+---------------------+------------+
+6 rows in set (0.00 sec)
+
+
+
+Q-15. Write an SQL query to print details of EMPLOYEEs with DEPARTMENT name as “Admin”.
+
+mysql> select * from employee where Department like 'Admin%';
++-------------+------------+-----------+--------+---------------------+------------+
+| Employee_id | First_Name | Last_Name | Salary | Joining_Date        | Department |
++-------------+------------+-----------+--------+---------------------+------------+
+|           2 | Niharika   | Verma     | 80000  | 2014-06-11 09:00:00 | Admin      |
+|           4 | Amitabh    | singh     | 500000 | 2014-02-20 09:00:00 | Admin      |
+|           5 | Vivek      | Bhati     | 500000 | 2014-06-11 09:00:00 | Admin      |
+|           8 | Geetika    | Chauhan   | 90000  | 2014-04-11 09:00:00 | Admin      |
++-------------+------------+-----------+--------+---------------------+------------+
+4 rows in set (0.00 sec)
+
+
+
+Q-16. Write an SQL query to print details of the EMPLOYEEs whose FIRST_NAME contains ‘a’. 
+
+mysql> select * from employee where First_Name like '%a%' ;
++-------------+------------+-----------+--------+---------------------+------------+
+| Employee_id | First_Name | Last_Name | Salary | Joining_Date        | Department |
++-------------+------------+-----------+--------+---------------------+------------+
+|           1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |
+|           2 | Niharika   | Verma     | 80000  | 2014-06-11 09:00:00 | Admin      |
+|           3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR         |
+|           4 | Amitabh    | singh     | 500000 | 2014-02-20 09:00:00 | Admin      |
+|           7 | Satish     | Kumar     | 75000  | 2014-01-20 09:00:00 | Account    |
+|           8 | Geetika    | Chauhan   | 90000  | 2014-04-11 09:00:00 | Admin      |
++-------------+------------+-----------+--------+---------------------+------------+
+6 rows in set (0.00 sec)
+
+
+
+Q-17. Write an SQL query to print details of the EMPLOYEEs whose FIRST_NAME ends with ‘a’.
+
+mysql> select * from employee where First_Name like '%a' ;
++-------------+------------+-----------+--------+---------------------+------------+
+| Employee_id | First_Name | Last_Name | Salary | Joining_Date        | Department |
++-------------+------------+-----------+--------+---------------------+------------+
+|           1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |
+|           2 | Niharika   | Verma     | 80000  | 2014-06-11 09:00:00 | Admin      |
+|           8 | Geetika    | Chauhan   | 90000  | 2014-04-11 09:00:00 | Admin      |
++-------------+------------+-----------+--------+---------------------+------------+
+3 rows in set (0.00 sec)
+
+
+
+Q-18. Write an SQL query to print details of the EMPLOYEEs whose FIRST_NAME ends with ‘h’ and contains six alphabets.
+
+mysql> select * from employee where First_Name like '_____h' ;
++-------------+------------+-----------+--------+---------------------+------------+
+| Employee_id | First_Name | Last_Name | Salary | Joining_Date        | Department |
++-------------+------------+-----------+--------+---------------------+------------+
+|           7 | Satish     | Kumar     | 75000  | 2014-01-20 09:00:00 | Account    |
++-------------+------------+-----------+--------+---------------------+------------+
+1 row in set (0.00 sec)
+
+
+
+Q-19. Write an SQL query to print details of the EMPLOYEEs whose SALARY lies between 100000 and 500000.
+
+mysql> select * from Employee where Salary between 100000 and 500000;
++-------------+------------+-----------+--------+---------------------+------------+
+| Employee_id | First_Name | Last_Name | Salary | Joining_Date        | Department |
++-------------+------------+-----------+--------+---------------------+------------+
+|           1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |
+|           3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR         |
+|           4 | Amitabh    | singh     | 500000 | 2014-02-20 09:00:00 | Admin      |
+|           5 | Vivek      | Bhati     | 500000 | 2014-06-11 09:00:00 | Admin      |
+|           6 | Vipul      | Diwan     | 200000 | 2014-06-11 09:00:00 | Account    |
++-------------+------------+-----------+--------+---------------------+------------+
+5 rows in set (0.00 sec)
+
+
+
+Q-20. Write an SQL query to print details of the EMPLOYEEs who have joined in Feb’2014.
+
+mysql> select * from Employee where year(Joining_Date)=2014 and month(Joining_Date)=2 ;
++-------------+------------+-----------+--------+---------------------+------------+
+| Employee_id | First_Name | Last_Name | Salary | Joining_Date        | Department |
++-------------+------------+-----------+--------+---------------------+------------+
+|           1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |
+|           3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR         |
+|           4 | Amitabh    | singh     | 500000 | 2014-02-20 09:00:00 | Admin      |
++-------------+------------+-----------+--------+---------------------+------------+
+3 rows in set (0.00 sec)
+
+
+
+Q-21. Write an SQL query to fetch the count of employees working in the department ‘Admin’.
+
+mysql> select COUNT(*) from employee WHERE Department ='Admin' ;
++----------+
+| COUNT(*) |
++----------+
+|        4 |
++----------+
+1 row in set (0.00 sec)
+
+
+
+Q-22. Write an SQL query to fetch EMPLOYEE names with salaries >= 50000 and <= 100000.
+
+mysql> select CONCAT(First_Name, ' ' , Last_Name) as EMPLOYEES, Salary from employee WHERE Employee_id in(select Employee_id from employee WHERE Salary BETWEEN 50000 AND 100000);
++-----------------+--------+
+| EMPLOYEES       | Salary |
++-----------------+--------+
+| Monika Arora    | 100000 |
+| Niharika Verma  | 80000  |
+| Satish Kumar    | 75000  |
+| Geetika Chauhan | 90000  |
++-----------------+--------+
+4 rows in set (0.01 sec)
+
+
+
+Q-23. Write an SQL query to fetch the no. of EMPLOYEEs for each department in the descending order.
+
+mysql> select Department, COUNT(Employee_id) Employees from employee GROUP BY Department ORDER BY Employees DESC;
++------------+-----------+
+| Department | Employees |
++------------+-----------+
+| Admin      |         4 |
+| HR         |         2 |
+| Account    |         2 |
++------------+-----------+
+3 rows in set (0.00 sec)
+
+
+
+Q-24. Write an SQL query to print details of the EMPLOYEEs who are also Managers.
+
+mysql> select DISTINCT employee.First_Name, title.Employee_title from employee INNER JOIN title ON employee.Employee_id = title.Employee_Ref_Id AND title.Employee_title IN ('Manager');
++------------+----------------+
+| First_Name | Employee_title |
++------------+----------------+
+| Monika     | Manager        |
+| Vivek      | Manager        |
++------------+----------------+
+2 rows in set (0.00 sec)
+
+
+
+Q-25. Write an SQL query to fetch duplicate records having matching data in some fields of a table.
+
+mysql> select Employee_Title, Affected_From, COUNT(*) from title GROUP BY Employee_Title, Affected_From HAVING COUNT(*) > 1;
++----------------+---------------------+----------+
+| Employee_Title | Affected_From       | COUNT(*) |
++----------------+---------------------+----------+
+| Executive      | 2014-06-11 00:00:00 |        3 |
+| Lead           | 2014-06-11 00:00:00 |        2 |
++----------------+---------------------+----------+
+2 rows in set (0.00 sec)
+
+
+
+Q-26. Write an SQL query to show only even rows from a table.
+
+mysql> select * from Employee WHERE MOD (Employee_id, 2) = 0;
++-------------+------------+-----------+--------+---------------------+------------+
+| Employee_id | First_Name | Last_Name | Salary | Joining_Date        | Department |
++-------------+------------+-----------+--------+---------------------+------------+
+|           2 | Niharika   | Verma     | 80000  | 2014-06-11 09:00:00 | Admin      |
+|           4 | Amitabh    | singh     | 500000 | 2014-02-20 09:00:00 | Admin      |
+|           6 | Vipul      | Diwan     | 200000 | 2014-06-11 09:00:00 | Account    |
+|           8 | Geetika    | Chauhan   | 90000  | 2014-04-11 09:00:00 | Admin      |
++-------------+------------+-----------+--------+---------------------+------------+
+4 rows in set (0.00 sec)
+
+
+
+Q-27. Write an SQL query to show the current date and time.
+
+mysql> SELECT CURDATE();
++------------+
+| CURDATE()  |
++------------+
+| 2022-03-03 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT NOW();
++---------------------+
+| NOW()               |
++---------------------+
+| 2022-03-03 03:31:19 |
++---------------------+
+1 row in set (0.00 sec)
+
+
+
+Q-28. Write an SQL query to show the top n (say 10) records of a table.
+
+mysql> select * from Employee ORDER BY Salary DESC LIMIT 10;
++-------------+------------+-----------+--------+---------------------+------------+
+| Employee_id | First_Name | Last_Name | Salary | Joining_Date        | Department |
++-------------+------------+-----------+--------+---------------------+------------+
+|           8 | Geetika    | Chauhan   | 90000  | 2014-04-11 09:00:00 | Admin      |
+|           2 | Niharika   | Verma     | 80000  | 2014-06-11 09:00:00 | Admin      |
+|           7 | Satish     | Kumar     | 75000  | 2014-01-20 09:00:00 | Account    |
+|           4 | Amitabh    | singh     | 500000 | 2014-02-20 09:00:00 | Admin      |
+|           5 | Vivek      | Bhati     | 500000 | 2014-06-11 09:00:00 | Admin      |
+|           3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR         |
+|           6 | Vipul      | Diwan     | 200000 | 2014-06-11 09:00:00 | Account    |
+|           1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR         |
++-------------+------------+-----------+--------+---------------------+------------+
+8 rows in set (0.00 sec)
+
+
+
+Q-29. Write an SQL query to fetch three max salaries from a table.
+
+mysql> select DISTINCT Salary from Employee a WHERE 3 >=(select COUNT(DISTINCT Salary) from Employee b WHERE a.Salary <=b.Salary) ORDER BY a.salary DESC;
++--------+
+| Salary |
++--------+
+| 90000  |
+| 80000  |
+| 75000  |
++--------+
+3 rows in set (0.00 sec)
+
