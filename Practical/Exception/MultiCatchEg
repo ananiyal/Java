@@ -1,0 +1,29 @@
+
+
+public class MultiCatchEg {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		try{
+			int arr[] = new int[6];
+			arr[6] = 5/0;
+			System.out.println(arr[6]);
+		}
+		
+		catch(ArithmeticException e) {
+			System.out.println(e);			
+		}
+		
+		catch(ArrayIndexOutOfBoundsException e) {
+			System.out.println(e);			
+		}
+		
+		catch(Exception e) {
+			System.out.println(e);			
+		}
+		
+		System.out.println("Hello");
+
+	}
+
+}
