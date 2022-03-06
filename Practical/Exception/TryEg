@@ -1,0 +1,29 @@
+
+public class Tryeg {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		try {
+			System.out.println("Hello...... How are you ??");
+			
+			int a = 5 / 0;
+			System.out.println(a);
+			
+			String b = null;
+			System.out.println("Value is " + b.length());
+			
+			String m = "ANA";
+			int c = Integer.parseInt(m);
+			System.out.println(c);
+			
+			int d[] = new int[5];
+			d[6] = 30;
+			System.out.println(d[6]);
+						
+		} catch (Exception e ) {
+			System.out.println(e);
+		}
+
+	}
+
+}
