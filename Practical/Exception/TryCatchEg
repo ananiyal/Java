@@ -1,23 +1,24 @@
 
 public class TryCatchEg {
 
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
 			System.out.println("Hello...... How are you ??");
 			
-			int a = 5 / 0;
+			int a = 5 / 0; // ArthmeticException - / by zero
 			System.out.println(a);
 			
-			String b = null;
+			String b = null; // NullPointer Exception
 			System.out.println("Value is " + b.length());
 			
 			String m = "ANA";
-			int c = Integer.parseInt(m);
+			int c = Integer.parseInt(m); //NumberFormatException
 			System.out.println(c);
 			
 			int d[] = new int[5];
-			d[6] = 30;
+			d[6] = 30; // ArrayIndexOutofBoundsException
 			System.out.println(d[6]);
 						
 		} catch (Exception e ) {
@@ -27,3 +28,4 @@ public class TryCatchEg {
 	}
 
 }
+
