@@ -1,0 +1,29 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class IOMismatchExcep {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter 1st Value");
+		int a=sc.nextInt();
+		System.out.println("Enter 2st Value");
+		int b=sc.nextInt();
+		int c;
+		
+		try {
+			   c=a/b;
+			   System.out.println("Result = "+c);
+		}
+		catch(ArithmeticException e) {
+			System.out.println(e);
+			
+		}
+		catch(InputMismatchException e) {
+			
+		}
+
+	}
+
+}
