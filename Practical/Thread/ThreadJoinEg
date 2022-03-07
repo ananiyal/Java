@@ -16,9 +16,9 @@ public class ThreadJoinEg extends Thread {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ThreadSleepEg t = new ThreadSleepEg();
-		ThreadSleepEg t1 = new ThreadSleepEg();
-		ThreadSleepEg t2 = new ThreadSleepEg();
+		ThreadJoinEg t = new ThreadJoinEg();
+		ThreadJoinEg t1 = new ThreadJoinEg();
+		ThreadJoinEg t2 = new ThreadJoinEg();
 		
 		t.start();
 			
